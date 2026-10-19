@@ -45,6 +45,94 @@
                 }
             }
         }
+
+
+         // Verifica se o usuário já deu consentimento
+    document.addEventListener('DOMContentLoaded', () => {
+        const consent = localStorage.getItem('moviti_cookie_consent');
+        const banner = document.getElementById('cookie-banner');
+        
+        if (!consent) {
+            // Mostra o banner após um pequeno delay para não impactar o carregamento inicial
+            setTimeout(() => {
+                banner.classList.remove('hidden');
+                // Pequeno atraso para a animação de subida
+                setTimeout(() => {
+                    banner.classList.remove('translate-y-full');
+                    banner.classList.add('translate-y-0');
+                }, 50);
+            }, 1000);
+        }
+    });
+
+    // Aceitar todos
+    function acceptAllCookies() {
+        localStorage.setItem('moviti_cookie_consent', JSON.stringify({
+            essential: true,
+            analytics: true,
+            marketing: true,
+            date: new Date().toISOString()
+        }));
+        hideBanner();
+        // Aqui você pode disparar a ativação dos scripts de análise/marketing
+        // Ex: gtag('consent', 'update', {...});
+    }
+
+    // Rejeitar opcionais
+    function rejectOptionalCookies() {
+        localStorage.setItem('moviti_cookie_consent', JSON.stringify({
+            essential: true,
+            analytics: false,
+            marketing: false,
+            date: new Date().toISOString()
+        }));
+        hideBanner();
+    }
+
+    // Abrir modal de personalização
+    function openCookieSettings() {
+        document.getElementById('cookie-settings-modal').classList.remove('hidden');
+    }
+
+    // Fechar modal
+    function closeCookieSettings() {
+        document.getElementById('cookie-settings-modal').classList.add('hidden');
+    }
+
+    // Salvar preferências personalizadas
+    function savePreferences() {
+        const analytics = document.getElementById('cookie-analytics').checked;
+        const marketing = document.getElementById('cookie-marketing').checked;
+        
+        localStorage.setItem('moviti_cookie_consent', JSON.stringify({
+            essential: true,
+            analytics: analytics,
+            marketing: marketing,
+            date: new Date().toISOString()
+        }));
+        
+        closeCookieSettings();
+        hideBanner();
+    }
+
+    // Esconde o banner com animação
+    function hideBanner() {
+        const banner = document.getElementById('cookie-banner');
+        banner.classList.remove('translate-y-0');
+        banner.classList.add('translate-y-full');
+        setTimeout(() => {
+            banner.classList.add('hidden');
+        }, 500);
+    }
+
+    // Função opcional para reabrir o banner (ex: link no footer)
+    function reopenCookieBanner() {
+        document.getElementById('cookie-banner').classList.remove('hidden');
+        setTimeout(() => {
+            document.getElementById('cookie-banner').classList.remove('translate-y-full');
+            document.getElementById('cookie-banner').classList.add('translate-y-0');
+        }, 50);
+    }
     </script>
 
     <style>
@@ -360,5 +448,92 @@
         </div>
     </footer>
 
+    <!-- Banner de Cookies -->
+<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[100] p-4 md:p-6 glass-card border-t border-gray-700/50 transform translate-y-full transition-transform duration-500 ease-in-out hidden">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        
+        <div class="flex items-start space-x-4 max-w-3xl">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0 mt-1 md:mt-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            </div>
+            <div>
+                <h3 class="text-white font-bold text-sm md:text-base mb-1">Sua privacidade</h3>
+                <p class="text-gray-400 text-xs md:text-sm leading-relaxed">
+                    Utilizamos cookies para melhorar sua experiência, analisar o tráfego e personalizar conteúdo. Você pode gerenciar suas preferências a qualquer momento. 
+                    <a href="cookies.html" class="text-blue-400 hover:text-blue-300 underline underline-offset-2">Política de Cookies</a>.
+                </p>
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto shrink-0">
+            <button onclick="acceptAllCookies()" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition-all shadow-lg shadow-blue-500/25">
+                Aceitar todos
+            </button>
+            <button onclick="openCookieSettings()" class="w-full sm:w-auto px-6 py-2.5 rounded-full glass-card hover:bg-gray-800/60 text-gray-200 text-sm font-medium transition-all border border-gray-700">
+                Personalizar
+            </button>
+            <button onclick="rejectOptionalCookies()" class="w-full sm:w-auto px-6 py-2.5 rounded-full hover:bg-gray-800/40 text-gray-400 hover:text-white text-sm font-medium transition-all">
+                Rejeitar opcionais
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal de Personalização (Oculto por padrão) -->
+<div id="cookie-settings-modal" class="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+    <div class="glass-card rounded-2xl p-6 md:p-8 max-w-lg w-full border border-gray-700 shadow-2xl">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold text-white">Preferências de Cookies</h3>
+            <button onclick="closeCookieSettings()" class="text-gray-400 hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        
+        <div class="space-y-4 mb-8">
+            <!-- Essenciais -->
+            <div class="flex items-start justify-between p-4 bg-gray-900/50 rounded-xl border border-gray-800">
+                <div>
+                    <h4 class="text-white font-semibold text-sm">Estritamente Necessários</h4>
+                    <p class="text-gray-400 text-xs mt-1">Essenciais para o funcionamento do site. Não podem ser desativados.</p>
+                </div>
+                <div class="relative inline-flex items-center cursor-not-allowed opacity-50">
+                    <input type="checkbox" checked disabled class="sr-only peer">
+                    <div class="w-11 h-6 bg-blue-600 rounded-full peer"></div>
+                    <div class="absolute left-[2px] top-[2px] w-5 h-5 bg-white rounded-full transition-transform translate-x-full"></div>
+                </div>
+            </div>
+
+            <!-- Análise -->
+            <div class="flex items-start justify-between p-4 bg-gray-900/50 rounded-xl border border-gray-800">
+                <div>
+                    <h4 class="text-white font-semibold text-sm">Análise e Desempenho</h4>
+                    <p class="text-gray-400 text-xs mt-1">Ajudam-nos a entender como os visitantes interagem com o site.</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="cookie-analytics" class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                </label>
+            </div>
+
+            <!-- Marketing -->
+            <div class="flex items-start justify-between p-4 bg-gray-900/50 rounded-xl border border-gray-800">
+                <div>
+                    <h4 class="text-white font-semibold text-sm">Marketing e Publicidade</h4>
+                    <p class="text-gray-400 text-xs mt-1">Usados para exibir anúncios relevantes e medir campanhas.</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="cookie-marketing" class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                </label>
+            </div>
+        </div>
+
+        <button onclick="savePreferences()" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold transition-all shadow-lg shadow-blue-600/25">
+            Salvar Preferências
+        </button>
+    </div>
+</div>
+    
 </body>
 </html>
