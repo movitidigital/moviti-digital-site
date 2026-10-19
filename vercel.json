@@ -1,5 +1,19 @@
 {
   "rewrites": [
-    { "source": "/cookies", "destination": "/cookies.html" }
+    {
+      "source": "/cookies",
+      "destination": "/cookies.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/cookies",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/html; charset=utf-8"
+        }
+      ]
+    }
   ]
 }
