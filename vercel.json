@@ -1,18 +1,19 @@
 {
   "rewrites": [
-    {
-      "source": "/cookies",
-      "destination": "/cookies.html"
-    }
+    { "source": "/cookies", "destination": "/cookies.html" },
+    { "source": "/privacidade", "destination": "/privacidade.html" }
   ],
   "headers": [
     {
       "source": "/cookies",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
+        { "key": "Content-Type", "value": "text/html; charset=utf-8" }
+      ]
+    },
+    {
+      "source": "/privacidade",
+      "headers": [
+        { "key": "Content-Type", "value": "text/html; charset=utf-8" }
       ]
     }
   ]
