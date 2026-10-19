@@ -412,41 +412,47 @@
         </div>
     </section>
 
-   <!-- Footer Corporativo -->
-    <footer class="pt-16 pb-8 border-t border-gray-800/80 bg-darkBg">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8 mb-12">
-            <div>
-                <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent block mb-4">
-                    MOVITI<span class="text-white font-light">.DIGITAL</span>
-                </span>
-                <p class="text-gray-500 text-sm pr-4 leading-relaxed">Soluções AI-first e Cloud-Agnostic para empresas que buscam eficiência, automação e alta performance em seus mercados.</p>
+<!-- Footer Corporativo -->
+<footer class="relative bg-[#0a0614] pt-16 pb-8 overflow-hidden border-t border-gray-800/50">
+    
+    <!-- Efeito de Fundo (Linhas Diagonais) -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: repeating-linear-gradient(45deg, #ffffff 0, #ffffff 1px, transparent 0, transparent 20px);"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        
+        <!-- Endereços -->
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 text-gray-400 text-sm mb-12">
+            <div class="flex items-center space-x-3 text-center md:text-left">
+                <svg class="w-5 h-5 text-gray-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span>Rua Funchal, 375 - 11º andar - Vila Olímpia - São Paulo SP - 04551-060</span>
             </div>
-            <div>
-                <h4 class="text-white font-semibold mb-4 tracking-wide text-sm uppercase">Links Rápidos</h4>
-                <ul class="space-y-2 text-sm text-gray-500">
-                    <li><a href="#solucoes" class="hover:text-blue-400 transition-colors">Soluções</a></li>
-                    <li><a href="#metodologia" class="hover:text-blue-400 transition-colors">Abordagem & Metodologia</a></li>
-                    <li><a href="#tecnologias" class="hover:text-blue-400 transition-colors">Ecossistema Tecnológico</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-white font-semibold mb-4 tracking-wide text-sm uppercase">Contato & Sede</h4>
-                <ul class="space-y-2 text-sm text-gray-500">
-                    <li class="flex items-center space-x-2">
-                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                        <span>Garanhuns, Pernambuco - Brasil</span>
-                    </li>
-                    <li class="flex items-center space-x-2 mt-2">
-                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                        <span>contato@movitidigital.com.br</span>
-                    </li>
-                </ul>
+
+            <!-- Divisor vertical (aparece apenas no desktop) -->
+            <div class="hidden md:block w-px h-6 bg-gray-700/50"></div>
+
+            <div class="flex items-center space-x-3 text-center md:text-left">
+                <svg class="w-5 h-5 text-gray-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span>Factual Corporate - Av. Júlio Brasileiro 114 - 2º andar - Heliópolis - Garanhuns - PE - 55.295.475</span>
             </div>
         </div>
-        <div class="text-center text-xs text-gray-600 border-t border-gray-800/50 pt-8 max-w-7xl mx-auto px-6">
-            <p>&copy; 2026 Moviti Digital (MVT Digital). Construído por Ewerton Benevides Oliveira. Todos os direitos reservados.</p>
+
+        <!-- Linha Divisória -->
+        <hr class="border-gray-800/80 mb-8" />
+
+        <!-- Copyright e Links Legais -->
+        <div class="flex flex-col md:flex-row items-center justify-between text-sm text-gray-500 gap-4">
+            <p>&copy; 2026 Moviti Digital. Todos os direitos reservados.</p>
+            
+            <div class="flex items-center space-x-6">
+                <!-- Link para a página de privacidade (que você pode criar depois) -->
+                <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+                <!-- Link para a página de cookies que criamos anteriormente -->
+                <a href="cookies.html" class="hover:text-white transition-colors">Política de Cookies</a>
+            </div>
         </div>
-    </footer>
+
+    </div>
+</footer>
 
     <!-- Banner de Cookies -->
 <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[100] p-4 md:p-6 glass-card border-t border-gray-700/50 transform translate-y-full transition-transform duration-500 ease-in-out hidden">
